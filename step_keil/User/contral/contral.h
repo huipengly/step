@@ -44,3 +44,4 @@ struct Arm_Step
 	unsigned int Hand_servo;	
 };
 
+void Arm_run(struct Arm_Stretch Stretch_run);

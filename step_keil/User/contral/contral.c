@@ -1,4 +1,5 @@
 #include "contral.h"
+#include "stepping_motor.h"
 static struct Arm_Angle Arm_angle_old;
 struct Arm_Stretch  Offset_Length(struct Arm_Stretch Arm_run)//增加补偿
 {
@@ -18,16 +19,16 @@ struct Arm_Angle Length_To_Angle(struct Arm_Stretch Arm_run)//从长度到角度
 {
 	double angle_a;
 	double angle_b;
-	double angle_c;
+	double angle_c = 0;
 	double Height2_Stretch2;
 	struct Arm_Angle Angle_one;
 	Height2_Stretch2 = Arm_run.Stretch * Arm_run.Stretch + Arm_run.Height * Arm_run.Height;
 	angle_a = acos((ARM_A2 + Height2_Stretch2 - ARM_B2)/(2 * ARM_A * sqrt(Height2_Stretch2))) * 180 / PI;
 	angle_b = acos((ARM_A2B2 - Height2_Stretch2) / ( 2 * ARM_2AB)) * 180 / PI;
-	angle_c = atan(Arm_run.Height / Arm_run.Stretch) * 180 / PI;
+	angle_c = (double)atan((double)Arm_run.Height / (double)Arm_run.Stretch) * 180 / PI;
 	Angle_one.Motor1_angle = angle_a + angle_c;
 	Angle_one.Motor2_angle = 180 - angle_b - Angle_one.Motor1_angle;
-	Angle_one.Motor3_angle = atan(Arm_run.Stretch_X / Arm_run.Stretch_Y) * 180 / PI;
+	Angle_one.Motor3_angle = (double)atan((double)Arm_run.Stretch_X / (double)Arm_run.Stretch_Y) * 180 / PI;
 	return (Angle_one);
 }
 struct Arm_Step Angle_To_step(struct Arm_Angle Arm_run) //从角度到步进电机步数
@@ -92,4 +93,6 @@ void Arm_run(struct Arm_Stretch Stretch_run)
 		PAN_Motor3 = 0;
 	}
 	Step_one = Angle_To_step(Arm_angle_send);
+	
+	stepping_motor_step_change( Step_one.Motor1_step, PAN_Motor1, Step_one.Motor2_step, PAN_Motor2, Step_one.Motor3_step, PAN_Motor3 );
 }

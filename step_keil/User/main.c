@@ -12,6 +12,8 @@
 ***********************************************************/
   
 #include "stm32f10x.h"
+#include "contral.h"
+#include "stepping_motor.h"
 
 /*************************************************
   Function:main       // º¯ÊýÃû³Æ
@@ -26,8 +28,14 @@
 *************************************************/
 int main(void)
 {
-  	  while(1);
-	  /* add your code here ^_^. */
+	
+	struct Arm_Stretch Stretch_run;
+	stepping_motor_Init();
+	Stretch_run.Stretch_X = 1;
+	Stretch_run.Stretch_Y = 5;
+	Stretch_run.Height = 10;
+	
+	Arm_run(Stretch_run);
 }
 
 /*********************************************END OF FILE**********************/
