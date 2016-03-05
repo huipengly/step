@@ -18,6 +18,9 @@
 #define HEIGHT_OFFSET           0	    // 高度校准
 #define LENGTH_OFFSET           0		// 长度校准
 #define PI                      3.141592653
+#define ANGLE_INIT1             0
+#define ANGLE_INIT2             0
+#define ANGLE_INIT3             0
 struct Arm_Stretch
 {
 	unsigned int Stretch_X;

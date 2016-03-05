@@ -19,6 +19,7 @@
 #define __INCLUDE_H
 
 //АэИз#include "Init.h"
+#include <math.h>
 
 #endif /*__INCLUDE_H*/
 
