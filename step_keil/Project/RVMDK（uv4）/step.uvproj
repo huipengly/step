@@ -330,7 +330,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\contral;..\..\User\delay;..\..\User\Key;..\..\User\stepping_motor</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -552,6 +552,26 @@
               <FileName>stm32f10x_it.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\User\stm32f10x_it.h</FilePath>
+            </File>
+            <File>
+              <FileName>contral.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\contral\contral.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\delay\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>Key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\Key\Key.c</FilePath>
+            </File>
+            <File>
+              <FileName>stepping_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\stepping_motor\stepping_motor.c</FilePath>
             </File>
           </Files>
         </Group>
