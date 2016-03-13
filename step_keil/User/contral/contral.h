@@ -1,4 +1,6 @@
-#include "include.h"
+#ifndef __CONTRAL_H
+#define __CONTRAL_H
+#include <include.h>
 #define ARM_A                   132    // upper arm
 #define ARM_B                   137    // lower arm
 #define ARM_2AB                 36168  // 2*A*B
@@ -47,3 +49,6 @@ struct Arm_Step
 
 void Arm_run(struct Arm_Stretch Stretch_run);
 void Arm_Angle_init(void);
+
+#endif
+

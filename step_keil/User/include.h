@@ -20,6 +20,11 @@
 
 //АэИз#include "Init.h"
 #include <math.h>
+#include "contral.h"
+#include "stepping_motor.h"
+#include "Key.h"
+#include "delay.h"
+
 
 #endif /*__INCLUDE_H*/
 

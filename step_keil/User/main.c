@@ -12,9 +12,11 @@
 ***********************************************************/
   
 #include "stm32f10x.h"
-#include "contral.h"
-#include "stepping_motor.h"
+#include "include.h"
 
+#define X_change = 0;
+#define Y_change = 1;
+#define H_change = 2;
 
 /*************************************************
   Function:main       // 函数名称
@@ -29,17 +31,70 @@
 *************************************************/
 int main(void)
 {
+	int KEY;
+	int state = 0;
 	
 	struct Arm_Stretch Stretch_run;
 	Arm_Angle_init();
 	stepping_motor_Init();
+	
+	Key_GPIO_Init();
+	delay_init(72);
+	
 	Stretch_run.Stretch_X = 5;
 	Stretch_run.Stretch_Y = 5;
 	Stretch_run.Height = 5;
 	
 	Arm_run(Stretch_run);
 	
-	while(1);
+	while(1)
+	{
+		KEY = Key_Scan();
+		if ( KEY_OK == KEY )//状态切换
+		{
+			state++;
+			if ( 3 == state)
+			{
+				state = 0;
+			}
+		}
+		switch( state )//state 0改变,1改变Y,2改变H
+		{
+			case 0 :
+				if( KEY_UP == KEY )
+				{
+					Stretch_run.Stretch_X++;
+				}
+				if( KEY_DOWN == KEY )
+				{
+					Stretch_run.Stretch_X--;
+				}
+				Arm_run(Stretch_run);
+				break;
+			case 1 :
+				if( KEY_UP == KEY )
+				{
+					Stretch_run.Stretch_Y++;
+				}
+				if( KEY_DOWN == KEY )
+				{
+					Stretch_run.Stretch_Y--;
+				}
+				Arm_run(Stretch_run);
+				break;
+			case 2 :
+				if( KEY_UP == KEY )
+				{
+					Stretch_run.Height++;
+				}
+				if( KEY_DOWN == KEY )
+				{
+					Stretch_run.Height--;
+				}
+				Arm_run(Stretch_run);
+				break;
+		}
+	}
 }
 
 /*********************************************END OF FILE**********************/

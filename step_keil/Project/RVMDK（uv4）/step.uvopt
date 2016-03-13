@@ -146,7 +146,7 @@
           <Type>0</Type>
           <LineNumber>38</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134224208</Address>
+          <Address>134224194</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -162,7 +162,7 @@
           <Type>0</Type>
           <LineNumber>98</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134225156</Address>
+          <Address>134225308</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -178,7 +178,7 @@
           <Type>0</Type>
           <LineNumber>35</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134224198</Address>
+          <Address>134224192</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -194,7 +194,7 @@
           <Type>0</Type>
           <LineNumber>16</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134224352</Address>
+          <Address>134224504</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -210,7 +210,7 @@
           <Type>0</Type>
           <LineNumber>48</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134224936</Address>
+          <Address>134225088</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -259,7 +259,7 @@
         <AscS3>0</AscS3>
         <aSer3>0</aSer3>
         <eProf>0</eProf>
-        <aLa>0</aLa>
+        <aLa>1</aLa>
         <aPa1>0</aPa1>
         <AscS4>0</AscS4>
         <aSer4>0</aSer4>
@@ -277,8 +277,8 @@
       <LogicAnalyzers>
         <Wi>
           <IntNumber>0</IntNumber>
-          <FirstString>(porta &amp; 0x00000001)</FirstString>
-          <SecondString>FF000000000000000000000000000000E0FFEF400000000000000000000000000000000028706F72746120262030783030303030303031290000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000001000000000000000000F03F100000000000000000000000000000000000000036190008</SecondString>
+          <FirstString>((PORTA &amp; 0x00000040) &gt;&gt; 6 &amp; 0x40) &gt;&gt; 6</FirstString>
+          <SecondString>00008000000000000000000000000000E0FFEF400100000000000000000000000000000028504F5254412026203078303030303030343029203E3E2036000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000001000000000000000000F03F1200000000000000000000000000000000000000181F0008</SecondString>
         </Wi>
       </LogicAnalyzers>
     </TargetOption>
