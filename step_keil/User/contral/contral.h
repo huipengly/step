@@ -17,12 +17,12 @@
 #define HAND_ROTATION_MAX       90
 #define HAND_ANGLE_OPEN         25		//抓手张开角度
 #define HAND_ANGLE_CLOSE        70      //抓手闭合角度
-#define HEIGHT_OFFSET           86	    // 高度校准
-#define LENGTH_OFFSET           17		// 长度校准
-#define Y_OFFSET				70		// Y轴校准
+#define HEIGHT_OFFSET           80	    // 高度校准
+#define LENGTH_OFFSET           15		// 长度校准
+#define Y_OFFSET				100		// Y轴校准
 #define PI                      3.141592653
-#define ANGLE_INIT1             0
-#define ANGLE_INIT2             49
+#define ANGLE_INIT1             34
+#define ANGLE_INIT2             -2
 #define ANGLE_INIT3             0
 struct Arm_Stretch
 {
@@ -41,10 +41,10 @@ struct Arm_Angle
 };
 struct Arm_Step
 {
-	unsigned int Motor1_step;
-	unsigned int Motor2_step;
-	unsigned int Motor3_step;
-	unsigned int Hand_servo;	
+	double Motor1_step;
+	double Motor2_step;
+	double Motor3_step;
+	double Hand_servo;	
 };
 
 void Arm_run(struct Arm_Stretch Stretch_run);
