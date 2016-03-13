@@ -15,6 +15,7 @@
 #include "contral.h"
 #include "stepping_motor.h"
 
+
 /*************************************************
   Function:main       // 函数名称
   Description:主函数    // 函数功能、性能等的描述
@@ -30,12 +31,15 @@ int main(void)
 {
 	
 	struct Arm_Stretch Stretch_run;
+	Arm_Angle_init();
 	stepping_motor_Init();
-	Stretch_run.Stretch_X = 1;
+	Stretch_run.Stretch_X = 5;
 	Stretch_run.Stretch_Y = 5;
-	Stretch_run.Height = 10;
+	Stretch_run.Height = 5;
 	
 	Arm_run(Stretch_run);
+	
+	while(1);
 }
 
 /*********************************************END OF FILE**********************/

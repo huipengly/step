@@ -1,18 +1,19 @@
 #include "contral.h"
 #include "stepping_motor.h"
-static struct Arm_Angle Arm_angle_old;
+struct Arm_Angle Arm_angle_old;
 struct Arm_Stretch  Offset_Length(struct Arm_Stretch Arm_run)//增加补偿
 {
+	Arm_run.Stretch_Y = Arm_run.Stretch_Y + Y_OFFSET;
 	Arm_run.Stretch = sqrt(Arm_run.Stretch_X * Arm_run.Stretch_X + Arm_run.Stretch_Y * Arm_run.Stretch_Y);
 	Arm_run.Stretch =Arm_run.Stretch + LENGTH_OFFSET;
-	Arm_run.Height = Arm_run.Height + HEIGHT_OFFSET;
+	Arm_run.Height = Arm_run.Height - HEIGHT_OFFSET;
 	return (Arm_run);
 }
-void Arm_Angle_init() //初始化角度
+void Arm_Angle_init(void) //初始化角度
 {
 	Arm_angle_old.Motor1_angle = ANGLE_INIT1;
 	Arm_angle_old.Motor2_angle = ANGLE_INIT2;
-	Arm_angle_old.Motor2_angle = ANGLE_INIT3;
+	Arm_angle_old.Motor3_angle = ANGLE_INIT3;
 	
 }
 struct Arm_Angle Length_To_Angle(struct Arm_Stretch Arm_run)//从长度到角度 cos a = (b^2+c^2-a^2)/2ab
