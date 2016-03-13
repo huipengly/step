@@ -58,40 +58,43 @@ int main(void)
 				state = 0;
 			}
 		}
-		switch( state )//state 0改变,1改变Y,2改变H
+		switch( state )//state 0改变x,1改变Y,2改变H
 		{
 			case 0 :
 				if( KEY_UP == KEY )
 				{
 					Stretch_run.Stretch_X++;
+					Arm_run(Stretch_run);
 				}
 				if( KEY_DOWN == KEY )
 				{
 					Stretch_run.Stretch_X--;
+					Arm_run(Stretch_run);
 				}
-				Arm_run(Stretch_run);
 				break;
 			case 1 :
 				if( KEY_UP == KEY )
 				{
 					Stretch_run.Stretch_Y++;
+					Arm_run(Stretch_run);
 				}
 				if( KEY_DOWN == KEY )
 				{
 					Stretch_run.Stretch_Y--;
+					Arm_run(Stretch_run);
 				}
-				Arm_run(Stretch_run);
 				break;
 			case 2 :
 				if( KEY_UP == KEY )
 				{
 					Stretch_run.Height++;
+					Arm_run(Stretch_run);
 				}
 				if( KEY_DOWN == KEY )
 				{
 					Stretch_run.Height--;
+					Arm_run(Stretch_run);
 				}
-				Arm_run(Stretch_run);
 				break;
 		}
 	}

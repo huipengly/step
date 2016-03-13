@@ -165,15 +165,15 @@ void stepping_motor_step_change( float motor1_step, int8_t motor1_direction, flo
 	{
 		//判断步进电机转动方向
 		GPIO_SetBits(GPIOB, GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7);//默认所有方向设置为正转，若标志量为负则将方向反转
-		if( 0 > motor1_direction )
+		if( 0 < motor1_direction )
 		{
 			GPIO_ResetBits(GPIOB, GPIO_Pin_5);
 		}
-		if( 0 > motor2_direction )
+		if( 0 < motor2_direction )
 		{
 			GPIO_ResetBits(GPIOB, GPIO_Pin_6);
 		}
-		if( 0 > motor3_direction )
+		if( 0 < motor3_direction )
 		{
 			GPIO_ResetBits(GPIOB, GPIO_Pin_7);
 		}

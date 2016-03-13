@@ -61,6 +61,9 @@ void Arm_run(struct Arm_Stretch Stretch_run)
 	Stretch_one = Offset_Length(Stretch_run);
 	Arm_angle_new = Length_To_Angle(Stretch_one);
 	Arm_angle_send = Add_Angle(Arm_angle_new,Arm_angle_old);
+	Arm_angle_old.Motor1_angle = Arm_angle_new.Motor1_angle;
+	Arm_angle_old.Motor2_angle = Arm_angle_new.Motor2_angle;
+	Arm_angle_old.Motor3_angle = Arm_angle_new.Motor3_angle;
 	if(Arm_angle_send.Motor1_angle < 0)
 	{
 		PAN_Motor1 = 1;
