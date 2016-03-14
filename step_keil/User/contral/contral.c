@@ -35,9 +35,9 @@ struct Arm_Angle Length_To_Angle(struct Arm_Stretch Arm_run)//从长度到角度
 struct Arm_Step Angle_To_step(struct Arm_Angle Arm_run) //从角度到步进电机步数
 {
 	struct Arm_Step Step_one;
-	Step_one.Motor1_step = Arm_run.Motor1_angle * 19 * 16 / 1.8;//步进电机每步1.8度，1:19减速
-	Step_one.Motor2_step = Arm_run.Motor2_angle * 19 * 16 / 1.8;
-	Step_one.Motor3_step = Arm_run.Motor3_angle * 19 * 16 / 1.8;
+	Step_one.Motor1_step = Arm_run.Motor1_angle * 13.7 * 16 / 1.8;//步进电机每步1.8度，1:19减速
+	Step_one.Motor2_step = Arm_run.Motor2_angle * 13.7 * 16 / 1.8;
+	Step_one.Motor3_step = Arm_run.Motor3_angle * 13.7 * 16 / 1.8;
 	return (Step_one);
 };
 struct Arm_Angle Add_Angle (struct Arm_Angle Arm_run_new ,struct Arm_Angle Arm_run_old)//变为增加的角度
