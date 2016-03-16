@@ -35,9 +35,9 @@ struct Arm_Angle Length_To_Angle(struct Arm_Stretch Arm_run)//从长度到角度
 struct Arm_Step Angle_To_step(struct Arm_Angle Arm_run) //从角度到步进电机步数
 {
 	struct Arm_Step Step_one;
-	Step_one.Motor1_step = Arm_run.Motor1_angle * 13.7 * 16 / 1.8;//步进电机每步1.8度，1:19减速
-	Step_one.Motor2_step = Arm_run.Motor2_angle * 13.7 * 16 / 1.8;
-	Step_one.Motor3_step = Arm_run.Motor3_angle * 13.7 * 16 / 1.8;
+	Step_one.Motor1_step = Arm_run.Motor1_angle * 13.7 * 16.0 / 1.8;//步进电机每步1.8度，1:19减速
+	Step_one.Motor2_step = Arm_run.Motor2_angle * 13.7 * 16.0 / 1.8;
+	Step_one.Motor3_step = Arm_run.Motor3_angle * 13.7 * 16.0 / 1.8;
 	return (Step_one);
 };
 struct Arm_Angle Add_Angle (struct Arm_Angle Arm_run_new ,struct Arm_Angle Arm_run_old)//变为增加的角度
@@ -56,8 +56,8 @@ void Arm_run(struct Arm_Stretch Stretch_run)
 	struct Arm_Stretch Stretch_one;
 	static struct Arm_Step Step_one_err;
 	struct Arm_Step Step_one;
-	unsigned char PAN_Motor1 = 0;               //positive and negative going motion
-	unsigned char PAN_Motor2 = 0;               //为0顺时针，为1逆时针；
+	unsigned char PAN_Motor1 = 0;               //positive and negative going motion；
+	unsigned char PAN_Motor2 = 0;               //motor1、2、3为0顺时针，为1逆时针；
 	unsigned char PAN_Motor3 = 0;
 	Stretch_one = Offset_Length(Stretch_run);
 	Arm_angle_new = Length_To_Angle(Stretch_one);
@@ -106,5 +106,5 @@ void Arm_run(struct Arm_Stretch Stretch_run)
 	Step_one_err.Motor3_step = Step_one.Motor3_step - (int)Step_one.Motor3_step;
 	
 	
-	stepping_motor_step_change( (int)Step_one.Motor1_step, PAN_Motor1, (int)Step_one.Motor2_step, PAN_Motor2, (int)Step_one.Motor3_step, PAN_Motor3 );
+	stepping_motor_step_change( (int)Step_one.Motor1_step, !PAN_Motor1, (int)Step_one.Motor2_step, PAN_Motor2, (int)Step_one.Motor3_step, PAN_Motor3 );//motor1方向取反
 }
