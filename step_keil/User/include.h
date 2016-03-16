@@ -24,6 +24,7 @@
 #include "stepping_motor.h"
 #include "Key.h"
 #include "delay.h"
+#include "nokia_5110.h"
 
 
 #endif /*__INCLUDE_H*/
