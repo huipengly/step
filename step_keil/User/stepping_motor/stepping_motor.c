@@ -130,17 +130,17 @@ void TIM3_IRQHandler(void)
 	if (TIM_GetITStatus(TIM3,TIM_IT_CC2) != RESET)
 	{
 		steps_counter++;
-		if (steps_counter >= steps_change[0])
+		if (steps_counter > steps_change[0])
 		{
 			TIM3->CCMR1 &= 0xFF0F;
 			motor1_change_finish = 1;
 		}
-		if (steps_counter >= steps_change[1])
+		if (steps_counter > steps_change[1])
 		{
 			TIM3->CCMR2 &= 0xFF0F;
 			motor2_change_finish = 1;
 		}
-		if (steps_counter >= steps_change[2])
+		if (steps_counter > steps_change[2])
 		{
 			TIM3->CCMR2 &= 0x0FFF;
 			motor3_change_finish = 1;
