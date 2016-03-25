@@ -1,6 +1,8 @@
 #ifndef __CONTRAL_H
 #define __CONTRAL_H
 #include <include.h>
+#define ARM_C1                  40			//补偿的长度
+#define ARM_C2                  37			
 #define ARM_A                   132    // upper arm
 #define ARM_B                   137    // lower arm
 #define ARM_2AB                 36168  // 2*A*B
@@ -17,6 +19,7 @@
 #define HAND_ROTATION_MAX       90
 #define HAND_ANGLE_OPEN         25		//抓手张开角度
 #define HAND_ANGLE_CLOSE        70      //抓手闭合角度
+#define HEIGHT_OFST							15
 #define HEIGHT_OFFSET           25	    // 高度校准
 #define LENGTH_OFFSET           15		// 长度校准
 #define Y_OFFSET								100		// Y轴校准

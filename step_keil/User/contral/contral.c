@@ -4,7 +4,7 @@ struct Arm_Angle Arm_angle_old;
 struct Arm_Stretch  Offset_Length(struct Arm_Stretch Arm_run)//增加补偿
 {
 	Arm_run.Stretch_Y = Arm_run.Stretch_Y + Y_OFFSET;
-	Arm_run.Stretch = sqrt(Arm_run.Stretch_X * Arm_run.Stretch_X + Arm_run.Stretch_Y * Arm_run.Stretch_Y);
+	Arm_run.Stretch = sqrt(Arm_run.Stretch_X * Arm_run.Stretch_X + Arm_run.Stretch_Y * Arm_run.Stretch_Y)-HEIGHT_OFST;
 	Arm_run.Stretch =Arm_run.Stretch + LENGTH_OFFSET;
 	Arm_run.Height = Arm_run.Height - HEIGHT_OFFSET;
 	return (Arm_run);
@@ -21,11 +21,13 @@ struct Arm_Angle Length_To_Angle(struct Arm_Stretch Arm_run)//从长度到角度
 	double angle_a;
 	double angle_b;
 	double angle_c = 0;
+	//double angle_d;
+	//double
 	double Height2_Stretch2;
 	struct Arm_Angle Angle_one;
 	Height2_Stretch2 = Arm_run.Stretch * Arm_run.Stretch + Arm_run.Height * Arm_run.Height;
 	angle_a = acos((ARM_A2 + Height2_Stretch2 - ARM_B2)/(2 * ARM_A * sqrt(Height2_Stretch2))) * 180 / PI;
-	angle_b = acos((ARM_A2B2 - Height2_Stretch2) / ( 2 * ARM_2AB)) * 180 / PI;
+	angle_b = acos((ARM_A2B2 - Height2_Stretch2) / ( ARM_2AB)) * 180 / PI;
 	angle_c = (double)atan((double)Arm_run.Height / (double)Arm_run.Stretch) * 180 / PI;
 	Angle_one.Motor1_angle = angle_a + angle_c;
 	Angle_one.Motor2_angle = 180 - angle_b - Angle_one.Motor1_angle;
@@ -54,7 +56,8 @@ void Arm_run(struct Arm_Stretch Stretch_run)
 	//static struct Arm_Angle Arm_angle_old;
 	struct Arm_Angle Arm_angle_send;
 	struct Arm_Stretch Stretch_one;
-	static struct Arm_Step Step_one_err;
+	static struct Arm_Step Step_one_err_zheng;
+	static struct Arm_Step Step_one_err_fu;
 	struct Arm_Step Step_one;
 	unsigned char PAN_Motor1 = 0;               //positive and negative going motion；
 	unsigned char PAN_Motor2 = 0;               //motor1、2、3为0顺时针，为1逆时针；
@@ -65,7 +68,7 @@ void Arm_run(struct Arm_Stretch Stretch_run)
 	Arm_angle_old.Motor1_angle = Arm_angle_new.Motor1_angle;
 	Arm_angle_old.Motor2_angle = Arm_angle_new.Motor2_angle;
 	Arm_angle_old.Motor3_angle = Arm_angle_new.Motor3_angle;
-	if(Arm_angle_send.Motor1_angle < 0)
+	if(Arm_angle_send.Motor1_angle < 0)       //判断正负
 	{
 		PAN_Motor1 = 1;
 		Arm_angle_send.Motor1_angle = -Arm_angle_send.Motor1_angle;
@@ -98,12 +101,37 @@ void Arm_run(struct Arm_Stretch Stretch_run)
 		PAN_Motor3 = 0;
 	}
 	Step_one = Angle_To_step(Arm_angle_send);
-	Step_one.Motor1_step += Step_one_err.Motor1_step;
-	Step_one.Motor2_step += Step_one_err.Motor2_step;
-	Step_one.Motor3_step += Step_one_err.Motor3_step;
-	Step_one_err.Motor1_step = Step_one.Motor1_step - (int)Step_one.Motor1_step;
-	Step_one_err.Motor2_step = Step_one.Motor2_step - (int)Step_one.Motor2_step;
-	Step_one_err.Motor3_step = Step_one.Motor3_step - (int)Step_one.Motor3_step;
+	if(PAN_Motor1 == 0)                //判断正负方向，然后分别累加误差
+	{
+		Step_one.Motor1_step += Step_one_err_zheng.Motor1_step;
+		Step_one_err_zheng.Motor1_step = Step_one.Motor1_step - (int)Step_one.Motor1_step;
+	}
+	else 
+	{
+		Step_one.Motor1_step += Step_one_err_fu.Motor1_step;
+		Step_one_err_fu.Motor1_step = Step_one.Motor1_step - (int)Step_one.Motor1_step;
+	}
+	if(PAN_Motor2 == 0)
+	{
+		Step_one.Motor2_step += Step_one_err_zheng.Motor2_step;
+		Step_one_err_zheng.Motor2_step = Step_one.Motor2_step - (int)Step_one.Motor2_step;
+	}
+	else 
+	{
+		Step_one.Motor2_step += Step_one_err_fu.Motor2_step;
+		Step_one_err_fu.Motor2_step = Step_one.Motor2_step - (int)Step_one.Motor2_step;
+	}
+	if(PAN_Motor3 == 0)
+	{
+		Step_one.Motor3_step += Step_one_err_zheng.Motor3_step;
+		Step_one_err_zheng.Motor3_step = Step_one.Motor3_step - (int)Step_one.Motor3_step;
+	}
+	else 
+	{
+		Step_one.Motor3_step += Step_one_err_fu.Motor3_step;
+		Step_one_err_fu.Motor3_step = Step_one.Motor3_step - (int)Step_one.Motor3_step;
+	}
+	
 	
 	
 	stepping_motor_step_change( (int)Step_one.Motor1_step, !PAN_Motor1, (int)Step_one.Motor2_step, PAN_Motor2, (int)Step_one.Motor3_step, PAN_Motor3 );//motor1方向取反
